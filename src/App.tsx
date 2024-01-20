@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import './App.css';
 import Main from 'views/Main';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
@@ -9,16 +9,28 @@ import ChatRoom from 'views/Chat';
 import BoardDetail from 'views/Board/Detail';
 import BoardWrite from 'views/Board/Write';
 import BoardUpdate from 'views/Board/Update';
-import Container from 'layouts/Container';
+import Navbar from 'layouts/Header/Navbar';
+import Modal from 'layouts/modals/Modal';
 import {
   MAIN_PATH, AUTH_PATH, SEARCH_PATH,
   USER_PATH, CHAT_PATH, BOARD_PATH, BOARD_DETAIL_PATH
   , BOARD_UPDATE_PATH, BOARD_WRITE_PATH
 } from 'constant';
 
+import ClientOnly from 'layouts/navbar/ClientOnly';
+import RegisterModal from 'layouts/modals/RegisterModal';
+
 
 
 // component: Application 컴포넌트 //
+
+
+export const metadata = {
+  title: "당근마켓",
+  description: '당근마켓',
+}
+
+
 
 
 function App() {
@@ -37,7 +49,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route element={<Container />} >
+        <Route element={<Navbar />} >
           <Route path={MAIN_PATH()} element={<Main />} />
           <Route path={AUTH_PATH()} element={<Authentication />} />
           <Route path={SEARCH_PATH(':searchWord')} element={<Search />} />
@@ -50,8 +62,9 @@ function App() {
           </Route>
           <Route path='*' element={<h1>404 Not Found</h1>} />
         </Route>
+
       </Routes>
-    </Router>
+    </Router >
   );
 }
 // <Router>
